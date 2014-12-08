@@ -14,8 +14,13 @@ namespace Sweeter.Models
             : base("DefaultConnection")
         {
         }
-
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserMultimedia> Multimedias { get; set; }
+        public DbSet<UserPost> Posts { get; set; }
+        public DbSet<Favourite> Favourites { get; set; }
+        public DbSet<Resweet> Resweets { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Friend> Friends { get; set; }
     }
 
     [Table("UserProfile")]
@@ -93,5 +98,11 @@ namespace Sweeter.Models
         public string Provider { get; set; }
         public string ProviderDisplayName { get; set; }
         public string ProviderUserId { get; set; }
+    }
+    public class SearchFriendsModel
+    {
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
     }
 }

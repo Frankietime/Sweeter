@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using Sweeter.Models;
 
 namespace Sweeter.Models
 {
     public class UserPost
     {
+        [Key]
         public int PostId { get; set; }
+        public int UserId { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
         public UserMultimedia[] Multimedias { get; set; }

@@ -81,16 +81,47 @@ namespace Sweeter.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+                    
+                    // Inicializa valores por default para el usuario
+
+                    //DefaultUser(model);
+
                     return RedirectToAction("Index", "Home");
-                }
+                    
+               }
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
+                
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        public void DefaultUser(RegisterModel model)
+        {
+            try
+            {
+                var Context = new UsersContext();
+                var UserIdQuery = from user in Context.UserProfiles select user;
+                int UserIdResult = 0;
+                foreach (var u in UserIdQuery)
+                {
+                    if (u.UserName == model.UserName)
+                    {
+                        UserIdResult = u.UserId;
+                        break;
+                    }
+                }
+                Context.Profiles.Add(new Profile {UserId = UserIdResult, Legend = "User created with default values"});
+                Context.SaveChanges();
+            }
+            catch (Exception)
+            {                
+                throw;
+            }            
         }
 
         //
@@ -337,9 +368,9 @@ namespace Sweeter.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Sweet", "Home");
             }
-        }
+        }  
 
         public enum ManageMessageId
         {

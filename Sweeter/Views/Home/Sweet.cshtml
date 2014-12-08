@@ -1,0 +1,42 @@
+﻿@{
+    @model Sweeter.Models.UserProfile
+    ViewBag.Title = "IndexSweet";
+}
+
+<h2>@User.Identity.Name</h2>
+<div>
+    @using (Html.BeginForm(@Html.ActionLink("SearchFriends", "SearchFriends", "Home")))
+    {
+        @Html.TextBoxFor(m => m.UserName)
+        <input type="submit" value="Search Friends!" />
+       
+    }
+</div>
+    <div>
+        <h3>Last Sweets...</h3>       
+        <ul>
+            @foreach (var p in ViewBag.List)
+            {
+                <li>@p.Title</li>
+                <li>@p.Text</li>
+                <li>@p.UserId</li>
+            }
+        </ul>
+    </div>
+    <div>
+        <h4>Sweet something...</h4>
+        <form>
+            <table>
+                <tr>
+                    <td><input type="text" name="SweetTitle" id="SweetTitle" value="Title..." /></td>
+                </tr>
+                <tr>
+                    <td><textarea name="SweetContent" id="SweetContent"></textarea></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Sweet!"></td>
+                </tr>
+            </table>
+        </form>
+
+    </div>

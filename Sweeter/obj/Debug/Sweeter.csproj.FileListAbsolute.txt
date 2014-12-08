@@ -84,3 +84,11 @@ c:\users\frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\bin\zh-Hant
 c:\users\frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.csprojResolveAssemblyReference.cache
 c:\users\frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.dll
 c:\users\frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.pdb
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\bin\EntityFramework.SqlServer.dll
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\bin\EntityFramework.SqlServer.xml
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.Initial.resources
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.csproj.GenerateResource.Cache
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.Initial2.resources
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.AddUserIdToUserPost.resources
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.ModifyFriends.resources
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.AddSearch.resources
