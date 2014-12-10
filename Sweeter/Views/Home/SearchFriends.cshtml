@@ -1,5 +1,18 @@
 ﻿@{
     ViewBag.Title = "SearchFriends";
-}
+    @model IEnumerable<Sweeter.Models.UserProfile>
+    }
 
 <h2>SearchFriends</h2>
+@foreach (var item in Model)
+{
+    <form action="AddFriend" method="post">
+        <ul>
+            <li>@item.UserName</li>
+            <li>PHOTO</li>
+        </ul>
+        <input type="hidden" value=@item.UserId id="friend" name="friend" />
+        <input type="submit" value="Add Friend" />
+    </form>
+
+}

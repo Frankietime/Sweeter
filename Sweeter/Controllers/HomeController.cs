@@ -9,10 +9,12 @@ namespace Sweeter.Controllers
 {
     public class HomeController : Controller
     {
+        UsersContext db = new UsersContext();
+
         public ActionResult Index()
         {            
             ViewBag.Message = "Social Network";
-            var db = new UsersContext();
+           
             var order = from p in db.Posts
                         orderby p.DateTime
                         select p;
@@ -36,9 +38,10 @@ namespace Sweeter.Controllers
 
         [Authorize]
         public ActionResult Sweet()
-        {
-            ViewBag.Search = View("SearchFriends");
-            var db = new UsersContext();
+        {         
+
+            // Rutina para mostrar los ultimos posts        TODO: Agregar limite de visualizacion
+
             
             var user = from u in db.UserProfiles
                        where u.UserName == User.Identity.Name
@@ -91,11 +94,41 @@ namespace Sweeter.Controllers
         }
 
     [Authorize]
-        public ActionResult SearchFriends(string ReturnUrl)
+        public ActionResult SearchFriends(string search = null)
         {
-            return View();
+            var SearchQuery = from s in db.UserProfiles
+                              where s.UserName.StartsWith(search)
+                              select s;
+            return View(SearchQuery);
+        
+        }
+        [Authorize]
+         public ActionResult AddFriend(int friend)
+            {
+            UsersContext db = new UsersContext();
+            var SelectFriend = from f in db.UserProfiles
+                                    where f.UserId == friend
+                                    select f.UserId;
+            var SelectUser = from u in db.UserProfiles
+                             where u.UserName == User.Identity.Name
+                             select u.UserId;
+            int _UserId = 0;
+            foreach(var u in SelectUser)
+            {
+               _UserId = u;
+            }
+            int _RelationshipId = 0;
+            foreach(var r in SelectFriend)
+            {
+                _RelationshipId = r;
+            }
+            Friend Friend = new Friend { UserId = _UserId, RelationshipId = _RelationshipId };
+            var FriendName = (from fn in db.UserProfiles
+                              where fn.UserId == friend
+                              select fn).First();
+            return View(FriendName);//Falta insertar Friend
         }
 
 
+        }
     }
-}

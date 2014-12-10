@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201412070654159_AddSearch.Designer.cs">
       <DependentUpon>201412070654159_AddSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412100449151_Update.cs" />
+    <Compile Include="Migrations\201412100449151_Update.Designer.cs">
+      <DependentUpon>201412100449151_Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MultimediaModels.cs" />
@@ -344,6 +348,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Sweet.cshtml" />
     <Content Include="Views\Home\SearchFriends.cshtml" />
+    <Content Include="Views\Home\AddFriend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -366,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412070654159_AddSearch.resx">
       <DependentUpon>201412070654159_AddSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412100449151_Update.resx">
+      <DependentUpon>201412100449151_Update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

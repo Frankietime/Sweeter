@@ -92,3 +92,4 @@ C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\S
 C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.AddUserIdToUserPost.resources
 C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.ModifyFriends.resources
 C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.AddSearch.resources
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.Update.resources

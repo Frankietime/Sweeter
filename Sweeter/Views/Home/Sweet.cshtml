@@ -5,12 +5,11 @@
 
 <h2>@User.Identity.Name</h2>
 <div>
-    @using (Html.BeginForm(@Html.ActionLink("SearchFriends", "SearchFriends", "Home")))
-    {
-        @Html.TextBoxFor(m => m.UserName)
+    <form action="SearchFriends" method="get">
+        <input type="search" id="search" name="search" />
         <input type="submit" value="Search Friends!" />
-       
-    }
+    </form>
+    
 </div>
     <div>
         <h3>Last Sweets...</h3>       

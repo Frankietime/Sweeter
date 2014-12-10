@@ -82,11 +82,10 @@ namespace Sweeter.Controllers
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
                     
-                    // Inicializa valores por default para el usuario
 
-                    //DefaultUser(model);
-
-                    return RedirectToAction("Index", "Home");
+                    DefaultUser(model);
+                    //Initialization();
+                    
                     
                }
                 catch (MembershipCreateUserException e)
@@ -98,6 +97,18 @@ namespace Sweeter.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        public ActionResult Initialization()
+        {
+            // Inicializa valores por default para el usuario
+            var db = new UsersContext();
+            var DefaultUser = (from d in db.UserProfiles
+                               where d.UserName == User.Identity.Name
+                               select d.UserId).First();
+
+            Profile UserProfile = new Profile { Friends = new Friend[1], Legend = "Hello! I'm a default Sweeter User", UserId = DefaultUser };
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
 
         public void DefaultUser(RegisterModel model)
