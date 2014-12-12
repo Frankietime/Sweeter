@@ -97,7 +97,7 @@ namespace Sweeter.Controllers
         public ActionResult SearchFriends(string search = null)
         {
             var SearchQuery = from s in db.UserProfiles
-                              where s.UserName.StartsWith(search)
+                              where s.UserName.StartsWith(search) & s.UserName != User.Identity.Name
                               select s;
             return View(SearchQuery);
         
@@ -105,28 +105,21 @@ namespace Sweeter.Controllers
         [Authorize]
          public ActionResult AddFriend(int friend)
             {
-            UsersContext db = new UsersContext();
-            var SelectFriend = from f in db.UserProfiles
+
+            var SelectFriend = (from f in db.UserProfiles
                                     where f.UserId == friend
-                                    select f.UserId;
-            var SelectUser = from u in db.UserProfiles
+                                    select f).First();
+            
+            var SelectUser = (from u in db.UserProfiles
                              where u.UserName == User.Identity.Name
-                             select u.UserId;
-            int _UserId = 0;
-            foreach(var u in SelectUser)
-            {
-               _UserId = u;
-            }
-            int _RelationshipId = 0;
-            foreach(var r in SelectFriend)
-            {
-                _RelationshipId = r;
-            }
-            Friend Friend = new Friend { UserId = _UserId, RelationshipId = _RelationshipId };
-            var FriendName = (from fn in db.UserProfiles
-                              where fn.UserId == friend
-                              select fn).First();
-            return View(FriendName);//Falta insertar Friend
+                             select u).First();
+            
+            Friend Friend = new Friend { UserId = SelectUser.UserId, RelationshipId = SelectFriend.UserId };
+            db.Friends.Add(Friend);
+            db.SaveChanges();
+            
+            return View(SelectFriend);/*Falta insertar Friend, eliminar al usuario del resultado de la busqueda, 
+                               * impedir la re adicion del mismo usuario*/
         }
 
 
