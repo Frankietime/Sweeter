@@ -19,11 +19,23 @@
                         @Html.Partial("_LoginPartial")
                     </section>
                     <nav>
+@if (Request.IsAuthenticated)
+{
+     <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Sweet", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Preferences","Preferences","Home")</li>
+                            <li>@Html.ActionLink("Friends", "Friends", "Home")</li>
+                        </ul>
+}
+else { 
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
+}
                     </nav>
                 </div>
             </div>

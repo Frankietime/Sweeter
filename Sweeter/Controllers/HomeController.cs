@@ -15,7 +15,7 @@ namespace Sweeter.Controllers
         {            
             ViewBag.Message = "Social Network";
            
-            var order = from p in db.Posts
+            var order = from p in db.UserPosts
                         orderby p.DateTime
                         select p;
             return View(order);
@@ -43,66 +43,70 @@ namespace Sweeter.Controllers
             // Rutina para mostrar los ultimos posts        TODO: Agregar limite de visualizacion
 
             
-            var user = from u in db.UserProfiles
+            var user = (from u in db.UserProfiles
                        where u.UserName == User.Identity.Name
-                       select u;
+                       select u.UserId).First();
 
-            int UserIdentity = 0;
-            foreach(var u in user)
-            {
-                UserIdentity = u.UserId;
-                
-            }
-            var Userposts = from p in db.Posts
-                        where p.UserId == UserIdentity
+
+            var model = from p in db.UserPosts
+                        where p.UserName == User.Identity.Name
                         select p;
-
             
-            var FriendsIdentity = from f in db.Friends
-                                  where f.UserId == UserIdentity
-                                  select f.RelationshipId;
-
-           var querylist = new List<IQueryable<UserPost>>();
-           var AllPosts = new List<UserPost>();
-
+           var FriendsIdentity = from f in db.Friends
+                                  where f.UserId == user
+                                  select f;
+           List<IQueryable<UserPost>> list = new List<IQueryable<UserPost>>();
             foreach(var f in FriendsIdentity)
             {
-               var FriendsPosts = from p in db.Posts
-                           where p.UserId ==  f
+               var friendpost = from p in db.UserPosts
+                           where p.UserId == f.RelationshipId
                            select p;
-               querylist.Add(FriendsPosts);
+               list.Add(friendpost);
             }
 
-            foreach(var q in querylist)
+            foreach(var p in list)
             {
-                foreach(var h in q)
-                {
-                    AllPosts.Add(h);
-                }
+                model = model.Concat(p);
             }
-
-          
-           foreach (var u in Userposts)
-           {
-               AllPosts.Add(u);
-           }
-            List<UserPost> PostList = AllPosts.OrderBy(o => o.DateTime).ToList();
-            ViewBag.List = PostList;
-            return View();
+            ViewBag.count = model.Count();
+            return View(model.ToList());
 
             
         }
 
-    [Authorize]
+        [Authorize]
         public ActionResult SearchFriends(string search = null)
         {
+            var SelectUser = (from u in db.UserProfiles
+                             where u.UserName == User.Identity.Name
+                             select u).First();
             var SearchQuery = from s in db.UserProfiles
                               where s.UserName.StartsWith(search) & s.UserName != User.Identity.Name
                               select s;
+
+
+            // Filtro de Usuarios ya agregados
+            
+            var CurrentFriends = from c in db.Friends
+                                 where c.UserId == SelectUser.UserId
+                                 select c;
+            List<IQueryable<UserProfile>> list = new List<IQueryable<UserProfile>>();
+            foreach(var c in CurrentFriends)
+            {
+                var UpdateQuery = from i in db.UserProfiles
+                                  where i.UserId == c.RelationshipId
+                                  select i;
+                list.Add(UpdateQuery);
+            }
+            foreach(var l in list)
+            {
+                SearchQuery = SearchQuery.Except(l);
+            }
+
             return View(SearchQuery);
         
         }
-        [Authorize]
+         [Authorize]
          public ActionResult AddFriend(int friend)
             {
 
@@ -113,15 +117,24 @@ namespace Sweeter.Controllers
             var SelectUser = (from u in db.UserProfiles
                              where u.UserName == User.Identity.Name
                              select u).First();
-            
+         
             Friend Friend = new Friend { UserId = SelectUser.UserId, RelationshipId = SelectFriend.UserId };
             db.Friends.Add(Friend);
             db.SaveChanges();
             
-            return View(SelectFriend);/*Falta insertar Friend, eliminar al usuario del resultado de la busqueda, 
+            return View(SelectFriend);/*Falta insertar Friend, indicar en l 
                                * impedir la re adicion del mismo usuario*/
         }
-
+        public ActionResult SweetPosts(string SweetTitle, string SweetContent)
+         {
+            var CurrentId = (from u in db.UserProfiles
+                         where u.UserName == User.Identity.Name
+                         select u.UserId).First();
+             UserPost SweetPost = new UserPost { UserName = User.Identity.Name, UserId = CurrentId, Title = SweetTitle, Text = SweetContent, DateTime = DateTime.Now };
+             db.UserPosts.Add(SweetPost);
+             db.SaveChanges();
+             return RedirectToAction("Sweet", "Home");
+         }
 
         }
     }

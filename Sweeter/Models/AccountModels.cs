@@ -16,7 +16,7 @@ namespace Sweeter.Models
         }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<UserMultimedia> Multimedias { get; set; }
-        public DbSet<UserPost> Posts { get; set; }
+        public DbSet<UserPost> UserPosts { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
         public DbSet<Resweet> Resweets { get; set; }
         public DbSet<Profile> Profiles { get; set; }

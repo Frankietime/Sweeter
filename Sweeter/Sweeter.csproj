@@ -214,6 +214,18 @@
     <Compile Include="Migrations\201412100449151_Update.Designer.cs">
       <DependentUpon>201412100449151_Update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412131820320_Modif.cs" />
+    <Compile Include="Migrations\201412131820320_Modif.Designer.cs">
+      <DependentUpon>201412131820320_Modif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412131825070_PostsToUserPosts.cs" />
+    <Compile Include="Migrations\201412131825070_PostsToUserPosts.Designer.cs">
+      <DependentUpon>201412131825070_PostsToUserPosts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412131843333_UserPostsAddUserName.cs" />
+    <Compile Include="Migrations\201412131843333_UserPostsAddUserName.Designer.cs">
+      <DependentUpon>201412131843333_UserPostsAddUserName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MultimediaModels.cs" />
@@ -374,6 +386,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412100449151_Update.resx">
       <DependentUpon>201412100449151_Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412131820320_Modif.resx">
+      <DependentUpon>201412131820320_Modif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412131825070_PostsToUserPosts.resx">
+      <DependentUpon>201412131825070_PostsToUserPosts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412131843333_UserPostsAddUserName.resx">
+      <DependentUpon>201412131843333_UserPostsAddUserName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

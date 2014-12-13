@@ -1,30 +1,28 @@
 ﻿@{
-    @model Sweeter.Models.UserProfile
+    @model IEnumerable<Sweeter.Models.UserPost>
     ViewBag.Title = "IndexSweet";
 }
 
 <h2>@User.Identity.Name</h2>
-<div>
-    <form action="SearchFriends" method="get">
-        <input type="search" id="search" name="search" />
-        <input type="submit" value="Search Friends!" />
-    </form>
-    
-</div>
+
     <div>
-        <h3>Last Sweets...</h3>       
-        <ul>
-            @foreach (var p in ViewBag.List)
-            {
-                <li>@p.Title</li>
-                <li>@p.Text</li>
-                <li>@p.UserId</li>
+        <h3>Last Sweets...</h3>
+    
+            @foreach (var post in Model.Take(10))
+{  
+                <ul>
+                    <p>@post.UserName</p>
+                    <li>@post.Title</li>
+                    <li>@post.Text</li>
+                </ul>
+                <hr />
             }
-        </ul>
+      
+
     </div>
     <div>
         <h4>Sweet something...</h4>
-        <form>
+        <form action="SweetPosts" method="post">
             <table>
                 <tr>
                     <td><input type="text" name="SweetTitle" id="SweetTitle" value="Title..." /></td>
