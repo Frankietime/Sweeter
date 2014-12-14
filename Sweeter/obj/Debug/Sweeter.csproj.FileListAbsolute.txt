@@ -199,3 +199,5 @@ C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\bin\Mono.Ma
 C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.Modif.resources
 C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.PostsToUserPosts.resources
 C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.UserPostsAddUserName.resources
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.ModelModif.resources
+C:\Users\Frank\Documents\Visual Studio 2013\Projects\Sweeter\Sweeter\bin\Microsoft.Web.Mvc.dll

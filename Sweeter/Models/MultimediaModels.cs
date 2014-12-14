@@ -10,9 +10,8 @@ namespace Sweeter.Models
      public class UserMultimedia
     {
         [Key]
-        public int UserMultimediaId { get; set; }
         public int UserId { get; set; }
-        public string Path { get; set; }
-        public string Description { get; set; }
+        public string PhotoPath { get; set; }
+        public string Legend { get; set; }
     }
 }

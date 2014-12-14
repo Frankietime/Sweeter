@@ -11,6 +11,13 @@ namespace Sweeter.Controllers
     {
         UsersContext db = new UsersContext();
 
+        public UserProfile SelectUser()
+        {
+            var SelectUser = (from u in db.UserProfiles
+                              where u.UserName == User.Identity.Name
+                              select u).First();
+            return SelectUser;
+        }
         public ActionResult Index()
         {            
             ViewBag.Message = "Social Network";
@@ -41,7 +48,7 @@ namespace Sweeter.Controllers
         {         
 
             // Rutina para mostrar los ultimos posts        TODO: Agregar limite de visualizacion
-
+            var CurrentUser = SelectUser();
             
             var user = (from u in db.UserProfiles
                        where u.UserName == User.Identity.Name
@@ -69,6 +76,18 @@ namespace Sweeter.Controllers
                 model = model.Concat(p);
             }
             ViewBag.count = model.Count();
+
+            string legend = (from p in db.Profiles
+                             where p.UserId == CurrentUser.UserId
+                             select p.Legend).First();
+
+            ViewBag.CurrentLegend = legend;
+
+            string photo = (from p in db.Profiles
+                            where p.UserId == CurrentUser.UserId
+                            select p.PhotoPath).First();
+            ViewBag.CurrentPhotoPath = "/Images" + photo;
+
             return View(model.ToList());
 
             
@@ -125,6 +144,7 @@ namespace Sweeter.Controllers
             return View(SelectFriend);/*Falta insertar Friend, indicar en l 
                                * impedir la re adicion del mismo usuario*/
         }
+        [Authorize]
         public ActionResult SweetPosts(string SweetTitle, string SweetContent)
          {
             var CurrentId = (from u in db.UserProfiles
@@ -135,6 +155,7 @@ namespace Sweeter.Controllers
              db.SaveChanges();
              return RedirectToAction("Sweet", "Home");
          }
+       
 
         }
     }

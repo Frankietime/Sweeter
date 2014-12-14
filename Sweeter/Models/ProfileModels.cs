@@ -11,7 +11,7 @@ namespace Sweeter.Models
         public int ProfileId { get; set; }
         public int UserId { get; set; }
         public Friend[] Friends { get; set; }
-        public UserMultimedia ProfilePhoto { get; set; }
+        public string PhotoPath { get; set; }
         public string Legend { get; set; }
     }
     public class Friend

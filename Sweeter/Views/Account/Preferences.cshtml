@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Preferences";
+}
+
+<h2>Preferences</h2>
+<div id="menu">
+    <h3>Photo </h3>
+        <img src="@Server.MapPath(Url.Content(ViewBag.CurrentPhotoPath))">
+    <form action="UserPhoto">
+        <input type="file" id="Photo" name="Photo" />
+        <input type="submit" value="Change Your Photo" />
+    </form>
+</div>
+<div id="menu">
+    <h3>Legend</h3>
+    <p>@ViewBag.CurrentLegend</p>
+    <form action="UserLegend">
+        <input type="text" id="Legend" name="Legend" />
+        <input type="submit" value="Change Your Legend" />
+    </form>
+</div>

@@ -4,14 +4,15 @@
 }
 
 <h2>@User.Identity.Name</h2>
-
+<img src="@Server.MapPath(Url.Content(ViewBag.CurrentPhotoPath))">
+<p>"@ViewBag.CurrentLegend"</p>
     <div>
         <h3>Last Sweets...</h3>
     
             @foreach (var post in Model.Take(10))
 {  
                 <ul>
-                    <p>@post.UserName</p>
+                    <li>@post.UserName</li>
                     <li>@post.Title</li>
                     <li>@post.Text</li>
                 </ul>

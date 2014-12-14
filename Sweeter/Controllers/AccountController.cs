@@ -17,6 +17,15 @@ namespace Sweeter.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        UsersContext db = new UsersContext();
+
+        public UserProfile SelectUser()
+        {
+            var SelectUser = (from u in db.UserProfiles
+                              where u.UserName == User.Identity.Name
+                              select u).First();
+            return SelectUser;
+        }
         //
         // GET: /Account/Login
 
@@ -106,11 +115,45 @@ namespace Sweeter.Controllers
                                where d.UserName == User.Identity.Name
                                select d.UserId).First();
 
-            Profile UserProfile = new Profile { Friends = new Friend[1], Legend = "Hello! I'm a default Sweeter User", UserId = DefaultUser };
+           // Profile UserProfile = new Profile {Legend = "Hello! I'm a default Sweeter User", PhotoPath = "Images/default-user-image.png", UserId = DefaultUser };
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
+        [Authorize]
+        public ActionResult Preferences()
+        {
+            var CurrentUser = SelectUser();
+            string photo = (from p in db.Profiles
+                        where p.UserId == CurrentUser.UserId
+                        select p.PhotoPath).First();
+            ViewBag.CurrentPhotoPath = "/Images" + photo;
 
+            string legend = (from p in db.Profiles
+                         where p.UserId == CurrentUser.UserId
+                         select p.Legend).First();
+
+            ViewBag.CurrentLegend = legend;
+            return View();
+        }
+        public ActionResult UserPhoto(string Photo)
+        {
+            var CurrentUser = SelectUser();
+            var profile = (from p in db.Profiles
+                           where p.UserId == CurrentUser.UserId
+                           select p).First();
+            db.Profiles.Attach(profile).PhotoPath = Photo;
+            return RedirectToAction("Preferences");
+        }
+        public ActionResult UserLegend(string Legend)
+        {
+            var CurrentUser = SelectUser();
+            var profile = (from p in db.Profiles
+                          where p.UserId == CurrentUser.UserId
+                          select p).First();
+            db.Profiles.Attach(profile).Legend = Legend;
+            db.SaveChanges();
+            return RedirectToAction("Preferences");
+        }
         public void DefaultUser(RegisterModel model)
         {
             try
@@ -126,7 +169,7 @@ namespace Sweeter.Controllers
                         break;
                     }
                 }
-                Context.Profiles.Add(new Profile {UserId = UserIdResult, Legend = "User created with default values"});
+                Context.Profiles.Add(new Profile { UserId = UserIdResult, Legend = "Hello! I'm a default Sweeter User", PhotoPath = "Images/default-user-image.png" });
                 Context.SaveChanges();
             }
             catch (Exception)
@@ -369,6 +412,7 @@ namespace Sweeter.Controllers
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
+       
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
@@ -445,5 +489,7 @@ namespace Sweeter.Controllers
             }
         }
         #endregion
+        
     }
+
 }
