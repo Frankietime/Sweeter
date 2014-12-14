@@ -234,6 +234,10 @@
     <Compile Include="Migrations\201412140040381_ModelModif.Designer.cs">
       <DependentUpon>201412140040381_ModelModif.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412142118155_modifProfiles.cs" />
+    <Compile Include="Migrations\201412142118155_modifProfiles.Designer.cs">
+      <DependentUpon>201412142118155_modifProfiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MultimediaModels.cs" />
@@ -382,6 +386,7 @@
     <Content Include="Views\Home\AddFriend.cshtml" />
     <Content Include="Views\Account\Preferences.cshtml" />
     <Content Include="Views\Shared\_html5shiv.cshtml" />
+    <Content Include="Views\Account\Friends.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -420,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412140040381_ModelModif.resx">
       <DependentUpon>201412140040381_ModelModif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412142118155_modifProfiles.resx">
+      <DependentUpon>201412142118155_modifProfiles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

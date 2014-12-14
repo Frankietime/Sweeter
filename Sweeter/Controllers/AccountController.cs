@@ -126,7 +126,7 @@ namespace Sweeter.Controllers
             string photo = (from p in db.Profiles
                         where p.UserId == CurrentUser.UserId
                         select p.PhotoPath).First();
-            ViewBag.CurrentPhotoPath = "/Images" + photo;
+            ViewBag.CurrentPhotoPath = photo;
 
             string legend = (from p in db.Profiles
                          where p.UserId == CurrentUser.UserId
@@ -134,6 +134,26 @@ namespace Sweeter.Controllers
 
             ViewBag.CurrentLegend = legend;
             return View();
+        }
+        [Authorize]
+        public ActionResult Friends()
+        {
+            var CurrentUser = SelectUser();
+            var friends = from f in db.Friends
+                      where f.UserId == CurrentUser.UserId
+                      select f;
+            IQueryable<Profile> FriendsProfiles = from p in db.Profiles
+                                                      where 0 == 1
+                                                      select p;
+            foreach(var f in friends)
+            {
+                var Profiles = from fp in db.Profiles
+                                      where fp.UserId == f.RelationshipId
+                                      select fp;
+                FriendsProfiles = FriendsProfiles.Concat(Profiles);
+            }
+            ViewBag.Count = FriendsProfiles.Count();
+            return View(FriendsProfiles);
         }
         public ActionResult UserPhoto(string Photo)
         {
@@ -169,7 +189,8 @@ namespace Sweeter.Controllers
                         break;
                     }
                 }
-                Context.Profiles.Add(new Profile { UserId = UserIdResult, Legend = "Hello! I'm a default Sweeter User", PhotoPath = "Images/default-user-image.png" });
+
+                Context.Profiles.Add(new Profile { UserId = UserIdResult, UserName = model.UserName, Legend = "Hello! I'm a default Sweeter User", PhotoPath = "Content/images/default-user-image.png" });
                 Context.SaveChanges();
             }
             catch (Exception)

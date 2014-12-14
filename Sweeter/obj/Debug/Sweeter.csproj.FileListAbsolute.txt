@@ -201,3 +201,9 @@ C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\S
 C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.UserPostsAddUserName.resources
 C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.ModelModif.resources
 C:\Users\Frank\Documents\Visual Studio 2013\Projects\Sweeter\Sweeter\bin\Microsoft.Web.Mvc.dll
+F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\bin\Microsoft.Web.Mvc.dll
+F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.Modif.resources
+F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.PostsToUserPosts.resources
+F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.UserPostsAddUserName.resources
+F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.ModelModif.resources
+F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.modifProfiles.resources

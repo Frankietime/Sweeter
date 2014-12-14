@@ -31,7 +31,7 @@ namespace Sweeter.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Sweeter is a social network simile to Tweeter, but with fewer people in it (by now)";
+            ViewBag.Message = "Sweeter is a social network";
 
             return View();
         }
@@ -86,7 +86,7 @@ namespace Sweeter.Controllers
             string photo = (from p in db.Profiles
                             where p.UserId == CurrentUser.UserId
                             select p.PhotoPath).First();
-            ViewBag.CurrentPhotoPath = "/Images" + photo;
+            ViewBag.CurrentPhotoPath = photo;
 
             return View(model.ToList());
 

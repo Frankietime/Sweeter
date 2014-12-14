@@ -5,7 +5,7 @@
 <h2>Preferences</h2>
 <div id="menu">
     <h3>Photo </h3>
-        <img src="@Server.MapPath(Url.Content(ViewBag.CurrentPhotoPath))">
+    <img height="100" width="100" src="~/@ViewBag.CurrentPhotoPath">
     <form action="UserPhoto">
         <input type="file" id="Photo" name="Photo" />
         <input type="submit" value="Change Your Photo" />

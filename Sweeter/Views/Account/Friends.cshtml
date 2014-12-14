@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Sweeter.Models.Profile>
+
+@{
+    ViewBag.Title = "Friends";
+}
+
+<h2>Friends</h2>
+
+<table id="menu">
+    <tr id="map_canvas">
+        <th>
+            Name
+        </th>
+        <th>
+            Photo
+        </th>
+        <th>
+            Legend
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            <img height="100" width="100" src="~/@item.PhotoPath">
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Legend)
+        </td>
+    </tr>
+}
+
+</table>

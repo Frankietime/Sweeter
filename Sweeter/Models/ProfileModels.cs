@@ -10,6 +10,7 @@ namespace Sweeter.Models
     {
         public int ProfileId { get; set; }
         public int UserId { get; set; }
+        public string UserName { get; set; }
         public Friend[] Friends { get; set; }
         public string PhotoPath { get; set; }
         public string Legend { get; set; }
