@@ -21,6 +21,7 @@ namespace Sweeter.Models
         public DbSet<Resweet> Resweets { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Friend> Friends { get; set; }
+        public DbSet<FriendRequest> FriendshipRequests { get; set; }
     }
 
     [Table("UserProfile")]

@@ -14,11 +14,10 @@ namespace Sweeter.Models
         public int PostId { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public string UserPhoto { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-        public UserMultimedia[] Multimedias { get; set; }
-        public Favourite[] Favourites { get; set; }
-        public Resweet[] Resweets { get; set; }
+        public UserMultimedia Photo { get; set; }
         public DateTime DateTime { get; set; }
     }  
     public class Favourite // Se inserta en el array Favourites del objeto UserPost
@@ -35,12 +34,4 @@ namespace Sweeter.Models
         public int PostId { get; set; }
         public int FromUserId { get; set; }
     }
-    /*public class UniversalPost
-  {
-      [Key]
-      public string UniversalPostId { get; set; } 
-      public int UserId { get; set; }
-      public int PostId { get; set; }
-      public string DateTime { get; set; }
-  }*/
 }

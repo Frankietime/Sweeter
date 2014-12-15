@@ -238,6 +238,18 @@
     <Compile Include="Migrations\201412142118155_modifProfiles.Designer.cs">
       <DependentUpon>201412142118155_modifProfiles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412142256355_modifMultimedia.cs" />
+    <Compile Include="Migrations\201412142256355_modifMultimedia.Designer.cs">
+      <DependentUpon>201412142256355_modifMultimedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412150207080_modifUserPosts.cs" />
+    <Compile Include="Migrations\201412150207080_modifUserPosts.Designer.cs">
+      <DependentUpon>201412150207080_modifUserPosts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412150322064_RequestFriend.cs" />
+    <Compile Include="Migrations\201412150322064_RequestFriend.Designer.cs">
+      <DependentUpon>201412150322064_RequestFriend.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MultimediaModels.cs" />
@@ -316,14 +328,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\html5shiv.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\html5shiv.js" />
+    <Content Include="Content\justified-nav.css" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -383,10 +396,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Sweet.cshtml" />
     <Content Include="Views\Home\SearchFriends.cshtml" />
-    <Content Include="Views\Home\AddFriend.cshtml" />
+    <Content Include="Views\Home\RequestFriend.cshtml" />
     <Content Include="Views\Account\Preferences.cshtml" />
     <Content Include="Views\Shared\_html5shiv.cshtml" />
     <Content Include="Views\Account\Friends.cshtml" />
+    <Content Include="Views\Home\AcceptFriend.cshtml" />
+    <Content Include="Views\Home\RequestList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -428,6 +443,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412142118155_modifProfiles.resx">
       <DependentUpon>201412142118155_modifProfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412142256355_modifMultimedia.resx">
+      <DependentUpon>201412142256355_modifMultimedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412150207080_modifUserPosts.resx">
+      <DependentUpon>201412150207080_modifUserPosts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412150322064_RequestFriend.resx">
+      <DependentUpon>201412150322064_RequestFriend.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -105,7 +105,7 @@ namespace Sweeter.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return RedirectToAction("Sweet", "Home");
         }
         public ActionResult Initialization()
         {
@@ -115,7 +115,6 @@ namespace Sweeter.Controllers
                                where d.UserName == User.Identity.Name
                                select d.UserId).First();
 
-           // Profile UserProfile = new Profile {Legend = "Hello! I'm a default Sweeter User", PhotoPath = "Images/default-user-image.png", UserId = DefaultUser };
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
@@ -133,6 +132,35 @@ namespace Sweeter.Controllers
                          select p.Legend).First();
 
             ViewBag.CurrentLegend = legend;
+            return View();
+        }
+        public ActionResult FileUpload(HttpPostedFileBase file, string type)
+        {
+
+            if (file == null)
+            {
+             return View();   
+            }
+            string ImageName = System.IO.Path.GetFileName(file.FileName);
+            string physicalPath = Server.MapPath("/Content/images/" + ImageName);
+            string tagPath = "/Content/images/" + ImageName;
+
+            // save image in folder
+            file.SaveAs(physicalPath);
+
+            var CurrentUser = SelectUser().UserId;
+            var profile = (from p in db.Profiles
+                        where p.UserId == CurrentUser
+                        select p).First();
+            profile.PhotoPath = tagPath;
+            db.SaveChanges();
+            
+            //Display records
+            return RedirectToAction("Preferences");
+        }
+
+        public ActionResult Display()
+        {
             return View();
         }
         [Authorize]
@@ -190,7 +218,7 @@ namespace Sweeter.Controllers
                     }
                 }
 
-                Context.Profiles.Add(new Profile { UserId = UserIdResult, UserName = model.UserName, Legend = "Hello! I'm a default Sweeter User", PhotoPath = "Content/images/default-user-image.png" });
+                Context.Profiles.Add(new Profile { UserId = UserIdResult, UserName = model.UserName, Legend = "Hello! I'm a default Sweeter User", PhotoPath = "/Content/images/default-user-image.png" });
                 Context.SaveChanges();
             }
             catch (Exception)

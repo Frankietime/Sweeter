@@ -88,8 +88,24 @@ namespace Sweeter.Controllers
                             select p.PhotoPath).First();
             ViewBag.CurrentPhotoPath = photo;
 
-            return View(model.ToList());
+            // Requests?
 
+            var Profile = (from p in db.Profiles
+                           where p.UserId == CurrentUser.UserId
+                           select p).First();
+
+            if (Profile.PendingRequests == true)
+            {
+                ViewBag.PendingRequests = 1;
+            }
+            else
+            {
+                ViewBag.PendingRequests = null;
+
+            }
+
+            return View(model.ToList());
+            
             
         }
 
@@ -99,7 +115,7 @@ namespace Sweeter.Controllers
             var SelectUser = (from u in db.UserProfiles
                              where u.UserName == User.Identity.Name
                              select u).First();
-            var SearchQuery = from s in db.UserProfiles
+            var SearchQuery = from s in db.Profiles
                               where s.UserName.StartsWith(search) & s.UserName != User.Identity.Name
                               select s;
 
@@ -109,10 +125,10 @@ namespace Sweeter.Controllers
             var CurrentFriends = from c in db.Friends
                                  where c.UserId == SelectUser.UserId
                                  select c;
-            List<IQueryable<UserProfile>> list = new List<IQueryable<UserProfile>>();
+            List<IQueryable<Profile>> list = new List<IQueryable<Profile>>();
             foreach(var c in CurrentFriends)
             {
-                var UpdateQuery = from i in db.UserProfiles
+                var UpdateQuery = from i in db.Profiles
                                   where i.UserId == c.RelationshipId
                                   select i;
                 list.Add(UpdateQuery);
@@ -126,10 +142,58 @@ namespace Sweeter.Controllers
         
         }
          [Authorize]
-         public ActionResult AddFriend(int friend)
+        public ActionResult RequestFriend(int friend)
+        {
+            var SelectFriend = (from f in db.Profiles
+                                where f.UserId == friend
+                                select f).First();
+
+            var SelectUser = (from u in db.UserProfiles
+                              where u.UserName == User.Identity.Name
+                              select u).First();
+            FriendRequest Request = new FriendRequest { UserId = SelectUser.UserId, FriendId = SelectFriend.UserId };
+            db.FriendshipRequests.Add(Request);
+            db.SaveChanges();
+
+            var InformRequest = (from i in db.Profiles
+                                where i.UserId == SelectFriend.UserId
+                                select i).First();
+            InformRequest.PendingRequests = true;
+            db.SaveChanges();
+            return RedirectToAction("Sweet");
+        }
+        [Authorize]
+         public ActionResult RequestList()
+         {
+            int UserId = SelectUser().UserId;
+            var CurrentUser = (from u in db.Profiles
+                              where u.UserId == UserId
+                              select u).First();
+            var Requests = from r in db.FriendshipRequests
+                           where r.FriendId == CurrentUser.UserId
+                           select r;
+            if (Requests.Count() < 1)
+            {
+                CurrentUser.PendingRequests = false;
+                db.SaveChanges();
+            }
+            IQueryable<Profile> RequestsProfiles = from p in db.Profiles
+                                                   where 0 == 1
+                                                   select p;
+            foreach(var r in Requests)
+            {
+                var profile = from p in db.Profiles
+                              where p.UserId == r.UserId
+                              select p;
+                RequestsProfiles = RequestsProfiles.Concat(profile);
+            }
+            return View(RequestsProfiles);
+         }
+         [Authorize]
+         public ActionResult AcceptFriend(int friend)
             {
 
-            var SelectFriend = (from f in db.UserProfiles
+            var SelectFriend = (from f in db.Profiles
                                     where f.UserId == friend
                                     select f).First();
             
@@ -139,6 +203,10 @@ namespace Sweeter.Controllers
          
             Friend Friend = new Friend { UserId = SelectUser.UserId, RelationshipId = SelectFriend.UserId };
             db.Friends.Add(Friend);
+            var DeleteRequest = (from r in db.FriendshipRequests
+                                where r.UserId == SelectFriend.UserId
+                                select r).First();
+            db.FriendshipRequests.Remove(DeleteRequest);                                
             db.SaveChanges();
             
             return View(SelectFriend);/*Falta insertar Friend, indicar en l 
@@ -147,10 +215,10 @@ namespace Sweeter.Controllers
         [Authorize]
         public ActionResult SweetPosts(string SweetTitle, string SweetContent)
          {
-            var CurrentId = (from u in db.UserProfiles
+            var CurrentUser = (from u in db.Profiles
                          where u.UserName == User.Identity.Name
-                         select u.UserId).First();
-             UserPost SweetPost = new UserPost { UserName = User.Identity.Name, UserId = CurrentId, Title = SweetTitle, Text = SweetContent, DateTime = DateTime.Now };
+                         select u).First();
+             UserPost SweetPost = new UserPost { UserName = User.Identity.Name, UserId = CurrentUser.UserId, UserPhoto = CurrentUser.PhotoPath, Title = SweetTitle, Text = SweetContent, DateTime = DateTime.Now };
              db.UserPosts.Add(SweetPost);
              db.SaveChanges();
              return RedirectToAction("Sweet", "Home");

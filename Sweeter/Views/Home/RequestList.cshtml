@@ -1,0 +1,17 @@
+﻿@{
+    @model IEnumerable<Sweeter.Models.Profile>
+    ViewBag.Title = "RequestList";
+}
+
+<h2>RequestList</h2>
+
+@foreach (var r in Model)
+{
+    <form action="AcceptFriend" method="post">
+        <p>User: @r.UserName</p>
+        <img height="100" width="100" src="@r.PhotoPath">
+        <p>@r.Legend</p>
+        <input type="hidden" value="@r.UserId" id="friend" name="friend"/>
+        <input type="submit" value="Add" />
+    </form>
+}

@@ -11,14 +11,21 @@ namespace Sweeter.Models
         public int ProfileId { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public Friend[] Friends { get; set; }
         public string PhotoPath { get; set; }
         public string Legend { get; set; }
+        public bool PendingRequests { get; set; }
     }
     public class Friend
     {
-        public int FriendId { get; set; } // Esta es la PK de la tabla, no el Id del amigo del UserId
+        public int FriendId { get; set; } 
         public int UserId { get; set; }
-        public int RelationshipId { get; set; } // Este es el Id del User amigo del UserId
+        public int RelationshipId { get; set; } 
     }
+    public class FriendRequest
+    {
+        public int FriendRequestId { get; set; }
+        public int UserId { get; set; }
+        public int FriendId { get; set; }
+    }
+        
 }

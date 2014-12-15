@@ -207,3 +207,7 @@ F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweet
 F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.UserPostsAddUserName.resources
 F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.ModelModif.resources
 F:\usuarios\alumno\Documentos\Visual Studio 2013\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.modifProfiles.resources
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.modifProfiles.resources
+C:\Users\Frank\documents\visual studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.modifMultimedia.resources
+C:\Users\Frank\Documents\Visual Studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.modifUserPosts.resources
+C:\Users\Frank\Documents\Visual Studio 2013\Projects\Sweeter\Sweeter\obj\Debug\Sweeter.Migrations.RequestFriend.resources

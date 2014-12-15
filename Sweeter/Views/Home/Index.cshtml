@@ -16,14 +16,14 @@
 
 <div>
     <h3>Last Sweets...</h3>
+    <br />
     @foreach (var post in Model)
     {
         <div>
-            <ul>
-                <li>@post.Title</li>
-                <li>@post.Text</li>
-                <li>@post.DateTime</li>
-            </ul>
+            <img height="100" width="100" src="@post.UserPhoto">
+            <p>@post.Title</p>
+            <p>@post.Text</p>
+            <p>@post.DateTime</p>
         </div>
     }
 </div>

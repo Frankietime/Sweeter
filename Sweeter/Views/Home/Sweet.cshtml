@@ -2,20 +2,22 @@
     @model IEnumerable<Sweeter.Models.UserPost>
     ViewBag.Title = "IndexSweet";
 }
-
+@if (ViewBag.PendingRequests == 1)
+{
+    <div class="text-left"></div><b>@Html.ActionLink("You have some friendship requests", "RequestList")</b>
+}
 <h2>@User.Identity.Name</h2>
-<img height="100" width="100" src="~/@ViewBag.CurrentPhotoPath">
+<img height="100" width="100" src="@ViewBag.CurrentPhotoPath">
 <p>"@ViewBag.CurrentLegend"</p>
-    <div>
+    <div class="span3">
+        <br />
         <h3>Last Sweets...</h3>
-    
+        <br />
             @foreach (var post in Model.Take(10))
-{  
-                <ul>
-                    <li>@post.UserName</li>
-                    <li>@post.Title</li>
-                    <li>@post.Text</li>
-                </ul>
+{               <img height="100" width="100" src="@post.UserPhoto">                
+                <p class="text-success">@post.UserName</p>                    
+                <p class="text-info">@post.Title</p>
+                <p>@post.Text</p>
                 <hr />
             }
       
